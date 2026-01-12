@@ -47,8 +47,13 @@ for image_batch,label_batch in dataloader_test:
     print(label_batch.shape)
     break
 
+#GPU か　CPU　を自動的に選ぶ
+device='cuda' if torch.cuda.is_available() else 'cpu'
+
 #モデルをインスタンス化する
 model=models.MyModel()
+# モデルを選んだデバイスに転送する
+model.to(device)
 
 #損失関数(誤差関数・ロス関数)の選択
 loss_fn=torch.nn.CrossEntropyLoss()
